@@ -10,8 +10,7 @@ import com.gl4.tp5mobile.databinding.ActivityWeatherForecastsBinding
 class WeatherForecastsActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityWeatherForecastsBinding
-    var forecastViewModel : ForecastViewModel = ForecastViewModel()
-    var data : List<WeatherResponse> = listOf()
+    var forecastViewModel : ForecastViewModel = ForecastViewModel(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,18 +20,19 @@ class WeatherForecastsActivity : AppCompatActivity() {
         val city=intent.getStringExtra("city")
         if(city != null){
             forecastViewModel.getForecast(city)
-
         }
 
-        forecastViewModel.weather.observe(this) {
-            if (it != null)
-                data = it
-                binding.forecastsRecycler.adapter = WeatherAdapter(data)
+        forecastViewModel.forecast.observe(this) {
+            if (it != null){
+                binding.forecastsRecycler.adapter = WeatherAdapter(forecastViewModel.forecast.value)
+
+                Toast.makeText(this@WeatherForecastsActivity,"ok", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.forecastsRecycler.apply {
             layoutManager = LinearLayoutManager(this@WeatherForecastsActivity)
-            adapter = WeatherAdapter(data)
+            adapter = WeatherAdapter(forecastViewModel.forecast.value)
         }
     }
 }

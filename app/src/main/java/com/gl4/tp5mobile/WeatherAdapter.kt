@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.gl4.tp5mobile.forecast_models.ForecastResponse
+import com.gl4.tp5mobile.weather_models.WeatherResponse
 
-class WeatherAdapter(private val forecast : List<WeatherResponse>) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
+class WeatherAdapter(private val forecast : ForecastResponse?) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val textView : TextView
@@ -21,10 +23,11 @@ class WeatherAdapter(private val forecast : List<WeatherResponse>) : RecyclerVie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = forecast[position].main.temp.toString()
+        holder.textView.text = forecast!!.list[position].pressure.toString()
     }
 
     override fun getItemCount(): Int {
-        return forecast.size
+        if(forecast != null) return forecast.list.size
+        return 0
     }
 }
