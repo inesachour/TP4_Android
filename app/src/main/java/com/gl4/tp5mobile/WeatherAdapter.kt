@@ -13,9 +13,11 @@ class WeatherAdapter(private val forecast : ForecastResponse?) : RecyclerView.Ad
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val pressure : TextView
         val temperature : TextView
+        val humidity : TextView
         init {
             pressure = itemView.findViewById(R.id.pressure)
             temperature = itemView.findViewById(R.id.temperature)
+            humidity = itemView.findViewById(R.id.humidity)
         }
     }
 
@@ -25,8 +27,9 @@ class WeatherAdapter(private val forecast : ForecastResponse?) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.pressure.text = forecast!!.list[position].pressure.toString()
-        holder.temperature.text = forecast!!.list[position].temp.day.toString()
+        holder.pressure.text = "Pressure ${forecast!!.list[position].pressure.toString()}"
+        holder.temperature.text = "Temperature ${forecast!!.list[position].temp.day.toString()}"
+        holder.humidity.text = "Humidity ${forecast!!.list[position].humidity.toString()}"
     }
 
     override fun getItemCount(): Int {

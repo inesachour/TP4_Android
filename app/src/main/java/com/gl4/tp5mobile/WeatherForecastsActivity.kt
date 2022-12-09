@@ -1,11 +1,11 @@
 package com.gl4.tp5mobile
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gl4.tp5mobile.databinding.ActivityMainBinding
 import com.gl4.tp5mobile.databinding.ActivityWeatherForecastsBinding
+
 
 class WeatherForecastsActivity : AppCompatActivity() {
 
@@ -26,6 +26,7 @@ class WeatherForecastsActivity : AppCompatActivity() {
         forecastViewModel.forecast.observe(this) {
             if (it != null){
                 binding.forecastsRecycler.adapter = WeatherAdapter(forecastViewModel.forecast.value)
+                binding.cityName.text = forecastViewModel.forecast.value!!.city.name
             }
         }
 
