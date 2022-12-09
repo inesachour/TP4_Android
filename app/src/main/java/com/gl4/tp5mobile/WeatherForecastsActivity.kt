@@ -18,6 +18,7 @@ class WeatherForecastsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val city=intent.getStringExtra("city")
+
         if(city != null){
             forecastViewModel.getForecast(city)
         }
@@ -25,8 +26,6 @@ class WeatherForecastsActivity : AppCompatActivity() {
         forecastViewModel.forecast.observe(this) {
             if (it != null){
                 binding.forecastsRecycler.adapter = WeatherAdapter(forecastViewModel.forecast.value)
-
-                Toast.makeText(this@WeatherForecastsActivity,"ok", Toast.LENGTH_SHORT).show()
             }
         }
 

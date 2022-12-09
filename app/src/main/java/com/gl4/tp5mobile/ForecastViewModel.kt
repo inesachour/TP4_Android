@@ -14,9 +14,6 @@ class ForecastViewModel(private val context : Context) {
     private val forecastResponse = MutableLiveData<ForecastResponse>()
     var forecast : LiveData<ForecastResponse> = forecastResponse
 
-    init {
-        getForecast("Tunis")
-    }
 
     fun getForecast(city : String){
         RetrofitHelper.retrofitService.getForecast(city).enqueue(

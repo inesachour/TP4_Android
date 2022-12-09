@@ -11,9 +11,11 @@ import com.gl4.tp5mobile.weather_models.WeatherResponse
 class WeatherAdapter(private val forecast : ForecastResponse?) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-        val textView : TextView
+        val pressure : TextView
+        val temperature : TextView
         init {
-            textView = itemView.findViewById(R.id.textView)
+            pressure = itemView.findViewById(R.id.pressure)
+            temperature = itemView.findViewById(R.id.temperature)
         }
     }
 
@@ -23,7 +25,8 @@ class WeatherAdapter(private val forecast : ForecastResponse?) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = forecast!!.list[position].pressure.toString()
+        holder.pressure.text = forecast!!.list[position].pressure.toString()
+        holder.temperature.text = forecast!!.list[position].temp.day.toString()
     }
 
     override fun getItemCount(): Int {
